@@ -41,8 +41,6 @@ if(args['custom'] != None):
     nodeFuncNames['custom'] = args['custom']
     
 
-
-
 nodeRes = {}
 
 
