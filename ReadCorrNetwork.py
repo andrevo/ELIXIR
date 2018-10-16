@@ -6,6 +6,7 @@ parser = argparse.ArgumentParser('Choose which network measures to compute')
 parser.add_argument('-e', action='store_true')
 parser.add_argument('-d', action='store_true')
 parser.add_argument('-c', action='store_true')
+parser.add_argument('--custom')
 parser.add_argument('-p', type=float)
 parser.add_argument('-f')
 args = vars(parser.parse_args())
@@ -39,6 +40,13 @@ for edge in edges:
 
 nodeFunc = {'e': nx.eigenvector_centrality, 'd': nx.degree, 'c': nx.clustering}
 nodeFuncNames = {'e': 'Eigenvector centrality', 'd': 'Degree', 'c': 'Clustering'}
+if(args['custom'] != None):
+    nodeFunc['custom'] = getattr(nx, args['custom'])
+    nodeFuncNames['custom'] = args['custom']
+    
+
+
+
 nodeRes = {}
 
 
