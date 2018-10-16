@@ -12,9 +12,8 @@ parser.add_argument('-f')
 args = vars(parser.parse_args())
 
 
-
 fname = 'inFile.txt'
-pVal = 0.1
+
 
 
 f = open(fname)
@@ -30,7 +29,11 @@ for line in f:
     edgeVals.append(float(splitLine[2]))
 
 edgeVals.sort(reverse=True)
-cutoffIndex = int(float(len(edgeVals))*0.01*args['p'])
+
+if args['p'] != None:
+    cutoffIndex = int(float(len(edgeVals))*0.01*args['p'])
+else:
+    cutoffIndex = len(edgeVals)-1
 cutoff = edgeVals[cutoffIndex]
 
 
