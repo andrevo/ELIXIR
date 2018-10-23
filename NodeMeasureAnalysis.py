@@ -11,8 +11,11 @@ parser.add_argument('-p', type=float)
 parser.add_argument('-f')
 args = vars(parser.parse_args())
 
-fname = 'inFile.txt'
-
+if args['f'] != None:
+    fname = args['f']
+else:
+    fname = inFile.txt
+    
 f = open(fname)
 
 network = nx.Graph()
