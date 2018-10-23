@@ -27,7 +27,7 @@ for line in f:
 
 edgeVals.sort(reverse=True)
 if args['p'] != None:
-    cutoffIndex = max(int(float(len(edgeVals))*0.01*args['p']), len(edgeVals))
+    cutoffIndex = min(int(float(len(edgeVals))*0.01*args['p']), len(edgeVals)-1)
     cutoff = edgeVals[cutoffIndex]
 else:
     cutoff = min(edgeVals)
