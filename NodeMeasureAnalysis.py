@@ -26,12 +26,16 @@ for line in f:
     edgeVals.append(float(splitLine[2]))
 
 edgeVals.sort(reverse=True)
-cutoffIndex = int(float(len(edgeVals))*0.01*args['p'])
-cutoff = edgeVals[cutoffIndex]
+if args['p'] != None:
+    cutoffIndex = max(int(float(len(edgeVals))*0.01*args['p']), len(edgeVals))
+    cutoff = edgeVals[cutoffIndex]
+else:
+    cutoff = min(edgeVals)
+
 
 
 for edge in edges:
-    if edges[edge] > cutoff:
+    if edges[edge] >= cutoff:
         network.add_edge(edge[0], edge[1], weight=edges[edge])
 
 nodeFunc = {'e': nx.eigenvector_centrality, 'd': nx.degree, 'c': nx.clustering}
@@ -39,7 +43,6 @@ nodeFuncNames = {'e': 'Eigenvector centrality', 'd': 'Degree', 'c': 'Clustering'
 if(args['custom'] != None):
     nodeFunc['custom'] = getattr(nx, args['custom'])
     nodeFuncNames['custom'] = args['custom']
-    
 
 nodeRes = {}
 
